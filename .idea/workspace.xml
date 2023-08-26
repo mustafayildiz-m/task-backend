@@ -25,7 +25,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/mustafayildiz/Desktop/yedek1/smpl-case/Backend/.dynamodb",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -49,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693049235876</updated>
       <workItem from="1693049237462" duration="14847000" />
-      <workItem from="1693070956165" duration="11709000" />
+      <workItem from="1693070956165" duration="12206000" />
     </task>
     <servers />
   </component>
