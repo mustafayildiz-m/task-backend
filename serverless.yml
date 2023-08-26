@@ -1,0 +1,134 @@
+service: smpl-case
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+	
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8888
+      migrate: true
+      seed: true
+    seed:
+      dev:
+        sources:
+          - table: folders-table
+            sources: [./folders.json]
+          - table: files-table
+            sources: [./files.json]
+  serverless-offline:
+    httpPort: 4000
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+  move:
+    handler: api/move.move
+    events:
+      - http:
+          path: /move
+          method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Headers
+              - Access-Control-Allow-Origin
+  folderList:
+    handler: api/folderList.folderList
+    events:
+      - http:
+          path: /folders
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Headers
+              - Access-Control-Allow-Origin
+  fileList:
+    handler: api/fileList.fileList
+    events:
+      - http:
+          path: /files
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Headers
+              - Access-Control-Allow-Origin
+  delete:
+    handler: api/delete.delete
+    events:
+      - http:
+          path: /delete
+          method: delete
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Headers
+              - Access-Control-Allow-Origin
+
+resources:
+  Resources:
+    FoldersTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        TableName: folders-table
+        AttributeDefinitions:
+          - AttributeName: "folderId"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "folderId"
+            KeyType: "HASH"
+    FilesTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        TableName: files-table
+        AttributeDefinitions:
+          - AttributeName: "folderId"
+            AttributeType: "S"
+          - AttributeName: "fileId"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "folderId"
+            KeyType: "HASH"
+          - AttributeName: "fileId"
+            KeyType: "RANGE"

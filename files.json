@@ -1,0 +1,32 @@
+[
+  {
+    "fileId": "file-1",
+    "name": "File 1",
+    "folderId": "folder-A"
+  },
+  {
+    "fileId": "file-2",
+    "name": "File 2",
+    "folderId": "folder-A"
+  },
+  {
+    "fileId": "file-3",
+    "name": "File 3",
+    "folderId": "folder-A"
+  },
+  {
+    "fileId": "file-4",
+    "name": "File 4",
+    "folderId": "folder-A"
+  },
+  {
+    "fileId": "file-5",
+    "name": "File 5",
+    "folderId": "folder-B"
+  },
+  {
+    "fileId": "file-6",
+    "name": "File 6",
+    "folderId": "folder-B"
+  }
+]
